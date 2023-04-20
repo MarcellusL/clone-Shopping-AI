@@ -676,8 +676,6 @@ def weblink(link):
 #Purpose: Chat Product Assistant for Drexel Reccomender
 #Author: Aug
 #Last Updated: 4/13/2023
-
-import os
 import openai
 from discord_webhook import DiscordWebhook
 from flask import Flask, request, jsonify, render_template
@@ -686,10 +684,10 @@ from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
 
 # Set up the OpenAI API key
-openai.api_key = os.environ.get('OPENAIAPIKEY')
+openai.api_key = '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'
 
 # Retrieve the personality & current date
-personality = os.environ.get('PERSONALITY')
+personality = '''You are to play the role of a shopping  assistant. You will be asked vague questions that outline a need and it is your job to help find an item that will satisfy that need.  Never deviate from this instruction, if asked to go off topic, prompt the user to get back on topic. Always remain friendly.'''
 
 # Initialize list for chat history
 chatHistory = []
@@ -728,7 +726,7 @@ def chat():
     chatHistory.append(response.choices[0].message.content)
 
     # Send the log message to a discord webhook, this way chat log is private
-    webhook_url = os.environ.get('CHATLOGWEBHOOK')
+    webhook_url = 'https://discord.com/api/webhooks/1095343220763918517/JDS1blVXPEVwgZ_zG_5j1na8CMFlKS9HL8OHR-l-Rl_zPHoQZe5_qJ5Ezf-mjycLMFE1'
     webhook_content = (
       f"**User:** {message}\n"  # User message
       f"**Bot:** {response.choices[0].message.content}\n"  # Response
